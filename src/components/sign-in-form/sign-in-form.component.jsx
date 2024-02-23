@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../custom-button/custom-button.component";
 
-import { signInWithGooglePopup, createUserDocumentFromAuth, signInUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
+import { signInWithGooglePopup, signInUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
 
 import './sign-in-form.styles.scss';
 
@@ -30,8 +30,8 @@ const SignInForm = () => {
         event.preventDefault();
 
         try {
-            const response = await signInUserWithEmailAndPassword(email, password);
-            console.log(response);
+            const { user } = await signInUserWithEmailAndPassword(email, password);
+            
             resetFormFields();            
         } catch (error) {
             if(error.code === 'auth/invalid-credential')
@@ -41,8 +41,7 @@ const SignInForm = () => {
     }
 
     const signInWithGoogle = async () => {
-        const { user } = await signInWithGooglePopup();
-        await createUserDocumentFromAuth(user);
+        await signInWithGooglePopup();
     }
     
     return (
