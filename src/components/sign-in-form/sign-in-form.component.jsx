@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 
 import FormInput from "../form-input/form-input.component";
-import Button from "../custom-button/custom-button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../custom-button/custom-button.component";
 
 import { signInWithGooglePopup, signInUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
 
@@ -54,7 +54,7 @@ const SignInForm = () => {
 
                 <ButtonsContainer>
                     <Button type="submit">Sign in</Button>
-                    <Button buttonType='google' type="button" onClick={signInWithGoogle}>Sign in with Google</Button>
+                    <Button buttonType={BUTTON_TYPE_CLASSES.google} type="button" onClick={signInWithGoogle}>Sign in with Google</Button>
                 </ButtonsContainer>
             </form>
         </SignInContainer>
